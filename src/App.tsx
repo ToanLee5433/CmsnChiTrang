@@ -3,7 +3,6 @@
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -26,16 +25,11 @@ function App() {
   const microphoneStreamRef = useRef<MediaStream | undefined>(undefined);
 
   const [playing, setPlaying] = useState(false);
-  const [paused, setPaused] = useState(false);
-  const [shareMode, setShareMode] = useState(false);
   const [musicStarted, setMusicStarted] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
   const [showCake, setShowCake] = useState(true);
 
-  const [name, setName] = useState("CMSN CHỊ TRANG");
-  const nameRef = useRef<HTMLInputElement>(null);
-
-  const visibility = shareMode || playing || showBackground
+  const [name] = useState("CMSN CHỊ TRANG");
 
   // Debug: Log playing state
   useEffect(() => {
@@ -58,12 +52,7 @@ function App() {
 
   const lightCandle = useCallback(() => setCandleVisible(true), []);
 
-  const turnOffTheCandle = useCallback(() => setCandleVisible(false), []);
 
-  const toggleLightCandle = useCallback(
-    () => setCandleVisible((prevState) => !prevState),
-    []
-  );
 
   const startAudio = useCallback(() => {
     console.log("🎵 Starting audio and showing background image");
@@ -77,40 +66,11 @@ function App() {
         console.error("Error playing audio:", error);
       });
     }
-    setPaused(false);
-  }, []);
-
-  const pause = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    setPaused(true);
-  }, []);
-
-  const stopAudio = useCallback(() => {
-    setPlaying(false);
-    setShowBackground(false);
-    setShowCake(true); // Hiện lại bánh kem
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    setPaused(false);
   }, []);
 
   const start = useCallback(() => {
     lightCandle();
   }, [lightCandle]);
-
-  const stop = useCallback(() => {
-    stopAudio();
-    turnOffTheCandle();
-    setMusicStarted(false);
-    setShowCake(true); // Hiện lại bánh kem
-    setTimeout(() => {
-      nameRef.current ? nameRef.current.focus() : undefined;
-    }, 0);
-  }, [stopAudio, turnOffTheCandle]);
 
   const blowCandles = useCallback(async (stream: MediaStream) => {
     try {
@@ -178,15 +138,7 @@ function App() {
     };
   }, [blowCandles]);
 
-  useLayoutEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const sharedParam = urlParams.get("shared");
-    if (sharedParam) {
-      setCandleVisible(true);
-      setShareMode(true);
-    }
-  }, []);
+
 
   return (
     <div
@@ -258,7 +210,7 @@ function App() {
                 animation: "pulse 2s infinite",
               }}
             >
-              Chị hãy thổi nến đi! 🕯️
+              Chị hãy thổi nến đi
             </div>
           )}
           

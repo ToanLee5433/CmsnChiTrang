@@ -20,7 +20,6 @@ export default defineConfig({
         manualChunks: {
           // Specify manual chunk names and modules
           react: ["react", "react-dom"],
-          lottie: ["react-lottie"],
         },
       },
     },

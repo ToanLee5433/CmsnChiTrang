@@ -14,7 +14,7 @@ import { CakeActions } from "./components/CakeActions";
 
 // const version = import.meta.env.PACKAGE_VERSION;
 
-const src = "./assets/hbd2.mp3";
+const src = "/assets/hbd2.mp3";
 
 
 

@@ -14,7 +14,7 @@ import { CakeActions } from "./components/CakeActions";
 
 // const version = import.meta.env.PACKAGE_VERSION;
 
-const src = new URL("/assets/hbd2.mp3", import.meta.url).href;
+const src = "/assets/hbd2.mp3";
 
 
 
@@ -153,7 +153,7 @@ function App() {
                      {/* Main Image */}
         {showBackground && (
           <img
-            src="/assets/background.jpg"
+            src="./assets/background.jpg"
             alt="Main Image"
             style={{
               position: "fixed",
@@ -210,7 +210,7 @@ function App() {
                 animation: "pulse 2s infinite",
               }}
             >
-              Chị hãy thổi nến đi
+              Chị hãy thổi nến đi ạ
             </div>
           )}
           
@@ -226,7 +226,7 @@ function App() {
            }}
          >
                     <dotlottie-player
-              src="/assets/hbd.lottie"
+              src="./assets/hbd.lottie"
               autoplay
               loop
                            style={{
@@ -246,7 +246,7 @@ function App() {
             }}
           >
                      <dotlottie-player
-               src="/assets/confetti.lottie"
+               src="./assets/confetti.lottie"
                autoplay
                loop
                             style={{

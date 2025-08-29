@@ -72,6 +72,26 @@ $chocolate: #553c13;
 
 body {
   background-color: #333;
+  transition: background-color 1s ease-in-out;
+  
+  &.with-background {
+    background-color: transparent;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 @mixin foodColoring($color) {

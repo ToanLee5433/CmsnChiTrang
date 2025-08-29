@@ -6,12 +6,13 @@ interface InputProps {
   shareMode: boolean;
   playing: boolean;
   run: boolean;
+  showBackground?: boolean;
 }
 
 export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
   forwardRef(
     (
-      { name, setName, shareMode, playing, run, ...rest }: InputProps,
+      { name, setName, shareMode, playing, run, showBackground, ...rest }: InputProps,
       ref: React.LegacyRef<HTMLInputElement>
     ) => {
       console.log("🚀 ~ playing:", playing);
@@ -60,19 +61,23 @@ export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
                 outline: 0,
                 backgroundColor: "#000000",
                 width: 400,
-                ...(shareMode || playing
-                  ? {
-                      appearance: "none",
-                      backgroundColor: "transparent",
-                      textAlign: "center",
-                      display: name.length > 0 ? "block" : "none",
-                    }
-                  : {}),
+                              ...(shareMode || playing || showBackground
+                ? {
+                    appearance: "none",
+                    backgroundColor: "transparent",
+                    textAlign: "center",
+                    display: name.length > 0 ? "block" : "none",
+                    fontSize: "3rem",
+                    color: "#FFD700",
+                    textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+                    fontWeight: "bold",
+                  }
+                : {}),
               },
               value: name,
               onChange,
-              disabled: shareMode || playing || run,
-              readOnly: shareMode || playing || run,
+              disabled: shareMode || playing || run || showBackground,
+              readOnly: shareMode || playing || run || showBackground,
               spellCheck: false,
               autoFocus: true,
               placeholder: "Enter your name",
